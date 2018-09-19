@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
     "module": "commonjs",
+    "moduleResolution": "node",
+    "typeRoots" : ["./src/types"],
 
     "importHelpers": true,
     "noEmitHelpers": true,
@@ -27,5 +29,9 @@
   },
   "include": [
     "src/index.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
   ]
 }

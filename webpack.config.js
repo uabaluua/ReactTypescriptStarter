@@ -3,6 +3,8 @@ const path = require('path');
 
 module.exports = {
   entry: './src/index.tsx',
+  mode: 'development',
+  devtool: 'source-map',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
@@ -10,9 +12,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(jsx|js)?$/,
+        use: ["source-map-loader"],
+        enforce: "pre"
+      },
+      {
+        test: /\.tsx|\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       },
       {
         test: /\.scss$/,
@@ -20,6 +31,13 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
         })
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          'url-loader?limit=10000',
+          'img-loader'
+        ]
       }
     ]
   },
